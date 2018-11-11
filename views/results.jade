@@ -1,0 +1,20 @@
+extends layout
+
+block content
+	div.content
+		legend Viewing Results for "#{question.question}"
+			div.centered
+				table.table.table-striped
+					tr 
+						td 
+							b Choice
+						td 
+							b Votes
+
+					each choice in choices
+						tr
+							td  #{choice.choice}
+							td  #{choice.totalVotes}
+		p
+			br
+			a.button.btn.btn-primary(href='/questions', type='button',  role='button') Back to Questions

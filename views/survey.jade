@@ -1,0 +1,38 @@
+extends layout
+
+block content
+	div.content
+		.row
+			.col-md-6
+				h2.lead Edit Survey
+				form(method='post', action='/surveys/'+ survey.Sid)
+					.form-group
+						textarea.input-lg(name='survey', id='title', class='form-control', rows='3', required)=survey.title
+					button.btn.btn-primary.btn-block Save
+				h2.lead Add New Question
+				form(method='post', action= survey.Sid+'/questions/add')
+					.input-group
+						input.form-control(type='text', name='question', placeholder='Enter a question', required)
+						span.input-group-btn
+							button.btn.btn-success(type='submit')
+								i.glyphicon.glyphicon-check
+			.col-md-6
+				h2.lead Edit Question
+				ul.list-group 
+					each question in survey.Questions
+						li.list-group-item
+							form(method='post', action='/surveys/questions/' + question.Qid)
+								.row
+									.col-xs-6
+										input.form-control(type='text', name='question', id='question_'+question.Qid, value=question.content, required)
+									.col-xs-3
+										button.btn.btn-success.btn-block(type='submit', alt='Save')
+											i.glyphicon.glyphicon-pencil
+									.col-xs-3
+										a.btn.btn-danger.btn-block(href='/surveys/' + survey.Sid + '/questions/' + question.Qid + '/delete')
+											i.glyphicon.glyphicon-trash
+		.row
+			.col-md-6
+				p
+					br
+					a.button.btn.btn-primary(href='/surveys') Back to surveys

@@ -1,0 +1,23 @@
+
+extends layout
+
+block content	
+	<!--Navbar Content-->
+	navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+		.container-fluid
+			.navbar-header
+				button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand(id='logo', href='./')
+					img(alt='Home', src='/images/logo.png' class='img-rounded' width='50' height='50')
+			nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+				ul.nav.navbar-nav.navbar-right 
+					li
+						a(href='/login') 
+							i.glyphicon.glyphicon-log-in
+							span  Admin
+	div.content
+		h1.lead.empty You have answered all of the questions. Please come back later!
