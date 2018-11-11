@@ -6,3 +6,5 @@ use <config fájlba beállított database név>;    (pl. use surveys;)
 insert into users values(2,'xy','xy','xy@xy.com','2018-11-10 19:04:15','2018-11-10 19:04:15');
 ```
 A use paranccsal az aktuális adatbázis a config fájlban megadott adatbázis lesz. Míg az insert parancs beszúr egy regisztrált felhasználót, amivel aztán be lehet login-olni az alkalmazásba.
+
+Ezután az alkalmazást le kell állítani és újraindítani, innentől a http://localhost:5000/login oldalon lehet elérni és használni a webalkalmazást.
