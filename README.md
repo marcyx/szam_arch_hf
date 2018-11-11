@@ -1,0 +1,1 @@
+# szoftverarchitekturak_hf
