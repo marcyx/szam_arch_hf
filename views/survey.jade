@@ -1,14 +1,35 @@
 extends layout
 
 block content
+	<!--Navbar Content-->
+	navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+		.container-fluid
+			.navbar-header
+				button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand(id='logo', href='/surveys')
+					img(alt='Home', src='/images/surveyHQ_logo.png' class='img-rounded' width='50' height='50')
+			nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+				ul.nav.navbar-nav.navbar-right 
+					li
+						a(href='/logout') 
+							i.glyphicon.glyphicon-log-out
+							span  Log out
+				.centered            
+					h1 Survey Editor
 	div.content
 		.row
 			.col-md-6
-				h2.lead Edit Survey
+				h1.lead Edit Survey Name
 				form(method='post', action='/surveys/'+ survey.Sid)
 					.form-group
 						textarea.input-lg(name='survey', id='title', class='form-control', rows='3', required)=survey.title
 					button.btn.btn-primary.btn-block Save
+				
+			.col-md-6
 				h2.lead Add New Question
 				form(method='post', action= survey.Sid+'/questions/add')
 					.input-group
@@ -16,8 +37,7 @@ block content
 						span.input-group-btn
 							button.btn.btn-success(type='submit')
 								i.glyphicon.glyphicon-check
-			.col-md-6
-				h2.lead Edit Question
+				h2.lead Already Added Questions
 				ul.list-group 
 					each question in survey.Questions
 						li.list-group-item

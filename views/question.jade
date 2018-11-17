@@ -1,6 +1,25 @@
 extends layout
 
 block content
+	<!--Navbar Content-->
+	navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+		.container-fluid
+			.navbar-header
+				button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand(id='logo', href='/surveys')
+					img(alt='Home', src='/images/surveyHQ_logo.png' class='img-rounded' width='50' height='50')
+			nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+				ul.nav.navbar-nav.navbar-right 
+					li
+						a(href='/logout') 
+							i.glyphicon.glyphicon-log-out
+							span  Log out
+				.centered            
+					h1 Question Editor
 	div.content
 		.row
 			.col-md-6
@@ -9,6 +28,8 @@ block content
 					.form-group
 						textarea.input-lg(name='question', id='question', class='form-control', rows='3', required)=question.content
 					button.btn.btn-primary.btn-block Save
+				
+			.col-md-6
 				h2.lead Add an Answer
 				form(method='post', action= question.Qid+'/answers/add')
 					.input-group
@@ -16,8 +37,7 @@ block content
 						span.input-group-btn
 							button.btn.btn-success(type='submit')
 								i.glyphicon.glyphicon-check
-			.col-md-6
-				h2.lead Edit Choices
+				h2.lead Already Added Choices
 				ul.list-group 
 					each answer in question.Answers
 						li.list-group-item
@@ -35,4 +55,4 @@ block content
 			.col-md-6
 				p
 					br
-					a.button.btn.btn-primary(href='/surveys/' + question.Sid) Back to survey
+					a.button.btn.btn-primary(href='/surveys/' + question.Sid) Back

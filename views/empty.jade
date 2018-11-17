@@ -11,13 +11,18 @@ block content
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
-				a.navbar-brand(id='logo', href='./')
-					img(alt='Home', src='/images/logo.png' class='img-rounded' width='50' height='50')
+				a.navbar-brand(id='logo', href='/surveys')
+					img(alt='Home', src='/images/surveyHQ_logo.png' class='img-rounded' width='50' height='50')
 			nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
 				ul.nav.navbar-nav.navbar-right 
 					li
-						a(href='/login') 
-							i.glyphicon.glyphicon-log-in
-							span  Admin
+						a(href='/logout') 
+							i.glyphicon.glyphicon-log-out
+							span  Log out
+				.centered            
+					h1 SurveyHQ
 	div.content
-		h1.lead.empty You have answered all of the questions. Please come back later!
+		h1.lead.empty You have already anwsered all question in this survey!
+	.row
+		center
+			a.button.btn.btn-primary(href='/all-surveys/') Back to all survey

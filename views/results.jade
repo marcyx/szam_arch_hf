@@ -1,20 +1,42 @@
 extends layout
 
 block content
+	<!--Navbar Content-->
+	navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+		.container-fluid
+			.navbar-header
+				button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand(id='logo', href='/surveys')
+					img(alt='Home', src='/images/surveyHQ_logo.png' class='img-rounded' width='50' height='50')
+			nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+				ul.nav.navbar-nav.navbar-right 
+					li
+						a(href='/logout') 
+							i.glyphicon.glyphicon-log-out
+							span  Log out
+				.centered            
+					h1 Result
 	div.content
-		legend Viewing Results for "#{question.question}"
+		legend Viewing Results for "#{survey.title}"
 			div.centered
-				table.table.table-striped
-					tr 
-						td 
-							b Choice
-						td 
-							b Votes
-
-					each choice in choices
-						tr
-							td  #{choice.choice}
-							td  #{choice.totalVotes}
+				each question in questions
+					table.table.table-striped
+						h1.lead #{question.content}
+						tr 
+							td 
+								b Answers
+							td 
+								b Votes
+						each answer in answers
+							each item in answer
+								if item.Qid == question.Qid
+									tr
+										td  #{item.content}
+										td  #{item.totalVotes}	
 		p
 			br
-			a.button.btn.btn-primary(href='/questions', type='button',  role='button') Back to Questions
+			a.button.btn.btn-primary(href='/surveys/') Back to homepage

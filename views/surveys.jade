@@ -11,34 +11,52 @@ block content
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                a.navbar-brand(id='logo', href='/')
-                    img(alt='Home', src='/images/logo.png' class='img-rounded' width='50' height='50')
+                a.navbar-brand(id='logo', href='/surveys')
+                    img(alt='Home', src='/images/surveyHQ_logo.png' class='img-rounded' width='50' height='50')
+            
             nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
                 ul.nav.navbar-nav.navbar-right 
                     li
                         a(href='/logout') 
                             i.glyphicon.glyphicon-log-out
                             span  Log out
+                .centered            
+                    h1 SurveyHQ                 
+
     div.content
-        div(class="centered")
+        div(class="left")
             .form-group
                 form(method='post', action='/add-survey', role="form", rows='2')
                     .form-group
-                        textarea.input-lg.form-control(id='survey_form', type='text', name='survey_title', placeholder='Enter a survey', required)
+                        textarea.input-lg.form-control(id='survey_form', type='text', name='survey_title', placeholder='Enter a survey name', required)
                         button.btn.btn-primary.btn-lg(type='submit') Create a Survey
-            h2.lead or Manage Surveys
+        div(class="right")
+            a.btn.btn-primary.singlebutton.btn-lg(href='/all-surveys')
+                        span  All Published Surveys by other Users
+        .centered
+            h1 Manage Your Surveys
     .row
         table.table
             each s in surveys
                 tr
                     td
-                        a(class='survey' href='/surveys/' + s.Sid)=s.title
+                        if !s.published
+                            a(class='survey' href='/surveys/' + s.Sid)=s.title
+                        else
+                           p #{s.title}
                     td.col-md-2
                         .btn-toolbar
-                            a.btn.btn-primary.singlebutton(href='/surveys/'+s.Sid)
-                                i.glyphicon.glyphicon-pencil
-                                span  Edit
-                            a.btn.btn-success.singlebutton(href='/surveys/'+s.Sid+'/results')
+                            if !s.published
+                                form(method='post', action='/surveys/'+ s.Sid+'/publish', role="form", rows='2')
+                                    button.btn.btn-primary(type='submit') Publish
+                            else
+                                .btn.btn-primary.singlebutton
+                                    span  Published
+                            if !s.published
+                                a.btn.btn-primary.singlebutton(href='/surveys/'+s.Sid)
+                                    i.glyphicon.glyphicon-pencil
+                                    span  Edit
+                            a.btn.btn-success.singlebutton(href='/surveys/'+s.Sid+'/result')
                                 i.glyphicon.glyphicon-stats
                                 span  Results
                             a.btn.btn-danger.singlebutton(href='/surveys/'+s.Sid+'/delete')
