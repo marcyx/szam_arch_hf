@@ -1,0 +1,39 @@
+extends layout
+
+block content
+
+    <!--Navbar Content-->
+    navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+        .container-fluid
+            .navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(id='logo', href='/surveys')
+                    img(alt='Home', src='/images/surveyHQ_logo.png' class='img-rounded' width='50' height='50')
+            nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+                ul.nav.navbar-nav.navbar-right 
+                    li
+                        a(href='/logout') 
+                            i.glyphicon.glyphicon-log-out
+                            span  Log out
+                .centered            
+                    h1 SurveyHQ
+
+    div.content
+        div(class="centered")
+            h2.lead ALL Surveys
+
+    .row
+        table.table
+            each s in surveys
+                if s.published
+                    tr
+                        td
+                            a(class='survey' href='/surveys/survey_fill/' + s.Sid)=s.title
+    .row
+        center
+            a.button.btn.btn-primary(href='/surveys/') Back to homepage
+                
