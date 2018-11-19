@@ -40,7 +40,7 @@ router.post('/login', function(req, res) {
         }
         else{
             req.session.loggedIn = false;
-            res.send('Bad username or password');
+            res.send('Username not existing);
         }
     });
 });
