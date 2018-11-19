@@ -37,6 +37,10 @@ router.post('/login', function(req, res) {
                 req.session.loggedIn = true;
                 res.redirect('/surveys');
             }
+            else{
+                req.session.loggedIn = false;
+                res.send('Bad password');
+            }
         }
         else{
             req.session.loggedIn = false;
