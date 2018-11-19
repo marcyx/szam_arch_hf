@@ -17,7 +17,7 @@ app.use(session( {
     genid: function(req) {
         return uuid.v1();
     },
-    secret: 'steph17',
+    secret: 'surveyHq',
     cookie:
         {
             secure: false
