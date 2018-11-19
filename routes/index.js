@@ -19,35 +19,30 @@ function checkAuth(req, res, next) {
 //Login authentication
 router.post('/login', function(req, res) {
     var post = req.body;
-    //Set the username to admin and password to 1234
-    if (post.user === 'admin' && post.password === '1234') {
-        req.session.loggedIn = true;
-        res.redirect('/surveys');
+    req.session.loggedIn = false;
 
-    //All other username - password are checked from MySQL database
-    } else {
-        req.session.loggedIn = false;
+    models.sequelize.query('SELECT uid, password FROM users WHERE username = ?', {
+            replacements: [post.user],
+            type: models.sequelize.QueryTypes.SELECT
+    }).then(function(query_result) {
 
-        models.sequelize.query('SELECT uid, password FROM users WHERE username = ?', {
-                replacements: [post.user],
-                type: models.sequelize.QueryTypes.SELECT
-            }).then(function(query_result) {
+        //console.log(query_result);
+        //console.log(query_result[0]['uid']);
 
-            //console.log(query_result);
-            //console.log(query_result[0]['password']);
-
+        if (query_result.length != 0){
             //Set uid for current session
             current_uid = query_result[0]['uid'];
 
-            if (post.password === query_result[0]['password']) {
+            if (post.password === query_result[0]['password']){
                 req.session.loggedIn = true;
                 res.redirect('/surveys');
             }
-            else
-                req.session.loggedIn = false;
-                res.send('Bad Password');
-        });
-    }
+        }
+        else{
+            req.session.loggedIn = false;
+            res.send('Bad username or password');
+        }
+    });
 });
 
 //Get the login page
